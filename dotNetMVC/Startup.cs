@@ -36,8 +36,17 @@ namespace dotNetMVC
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddDbContext<dotNetMVCContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("dotNetMVCContext")));
+            //Alterar para MySQL no lugar de SqlServer
+            services.AddDbContext<dotNetMVCContext>(options =>  //Contexto relacionado ao entity framework que herda a classe DBContext
+            options.UseMySql(Configuration.GetConnectionString("dotNetMVCContext"), builder =>
+                                                        //Nome do assembly
+                           builder.MigrationsAssembly("dotNetMVC")));
+            //options.UseSqlServer(Configuration.GetConnectionString("dotNetMVCContext")));
+            
+            /* É necessário ter o provider do MySQLL para o entity framework, para que ele reconheça
+             * qual a linguagem do banco de dados que estamos a trabalhar, nas dependencias do nuget,
+             * incluir a dependência do Pomelo.EntityFramework.MySQL, ter MUITA ATENÇÃO nas versões do .NET
+             * que estamos a trabalhar e nas versoes SDK/Entity framework, para todas serem compatíveis.*/
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
