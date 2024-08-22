@@ -13,7 +13,11 @@ namespace dotNetMVC.Data
             : base(options)
         {
         }
-
-        public DbSet<dotNetMVC.Models.Department> Department { get; set; }
+        //TER ATENÇÃO E ESSA PARTE, POIS É FUNDAMENTAL PARA A MIGRATION!
+        //dotNetMVC.Models não precisamos passar esse argumento pois o nome do namespace já é o dotNetMVC.
+        //public DbSet<dotNetMVC.Models.Department> Department { get; set; }
+        public DbSet<Department> Department { get; set; }
+        public DbSet <Seller> Seller { get; set; }
+        public DbSet <SalesRecord> SalesRecord { get; set; }
     }
 }
