@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using dotNetMVC.Data;
+using dotNetMVC.Services;
 
 namespace dotNetMVC
 {
@@ -48,8 +49,9 @@ namespace dotNetMVC
              * incluir a dependência do Pomelo.EntityFramework.MySQL, ter MUITA ATENÇÃO nas versões do .NET
              * que estamos a trabalhar e nas versoes SDK/Entity framework, para todas serem compatíveis.*/
 
-            //Registra o serviço no sistema de injeção de dependência da aplicação
+            //Registra o serviço no sistema de injeção de dependência da aplicação para os serviços serem injetados em outras classes
             services.AddScoped<SeedingService>();
+            services.AddScoped<SellerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
