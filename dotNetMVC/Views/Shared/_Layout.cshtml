@@ -30,9 +30,13 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
+                    @* Os nomes do asp-controller devem ser iguais aos que definimos na pasta controller *@
                     <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li>
+                    <li><a asp-area="" asp-controller="Departments" asp-action="Index">Departments</a></li>
+                    <li><a asp-area="" asp-controller="Sellers" asp-action="Index">Sellers</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="About">About</a></li>
                     <li><a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a></li>
+
                 </ul>
             </div>
         </div>
