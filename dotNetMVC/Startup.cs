@@ -42,19 +42,23 @@ namespace dotNetMVC
                                                         //Nome do assembly
                            builder.MigrationsAssembly("dotNetMVC")));
             //options.UseSqlServer(Configuration.GetConnectionString("dotNetMVCContext")));
-            
+
             /* É necessário ter o provider do MySQLL para o entity framework, para que ele reconheça
              * qual a linguagem do banco de dados que estamos a trabalhar, nas dependencias do nuget,
              * incluir a dependência do Pomelo.EntityFramework.MySQL, ter MUITA ATENÇÃO nas versões do .NET
              * que estamos a trabalhar e nas versoes SDK/Entity framework, para todas serem compatíveis.*/
+
+            //Registra o serviço no sistema de injeção de dependência da aplicação
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed(); // Popula a base de dados
             }
             else
             {
