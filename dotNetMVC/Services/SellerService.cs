@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using dotNetMVC.Data;
 using dotNetMVC.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotNetMVC.Services
 {
@@ -31,8 +32,8 @@ namespace dotNetMVC.Services
 
         //Busca vendedor pelo ID
         public Seller FindById(int id)
-        {
-            return _context.Seller.FirstOrDefault(obj => obj.Id == id);
+        {   //Carrega os objetos relacionados com o objeto principal, no caso o vendedor possuí um departamento(outra classe)...
+            return _context.Seller.Include(obj => obj.Department).FirstOrDefault(obj => obj.Id == id);
         }
 
         public void Remove(int id)
