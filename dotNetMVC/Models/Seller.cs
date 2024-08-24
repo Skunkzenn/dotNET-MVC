@@ -12,6 +12,8 @@ namespace dotNetMVC.Models
         public DateTime BirthDate { get; set; }
         public double BaseSalary { get; set; }
         public Department Department { get; set; } //Associação ao departamento
+        public int DepartmentId { get; set; } //Inclui o ID do departamento, indicando para o entity framework que o ID terá que existir na classe seller,
+                                              //garantindo assim que o ID não será nulo. (tipo int não pode ser nulo!)
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>(); //Associação sob o SalesRecord, INSTÂNCIAR!!
 
         /*

@@ -24,6 +24,7 @@ namespace dotNetMVC.Services
         //Método para inserir o vendedor no banco de dados
         public void Insert(Seller obj)
         {
+            obj.Department = _context.Department.First(); //Pega o primeiro departamento disponivel no banco de dados e associa com o vendedor que está a ser criado
             _context.Add(obj);
             _context.SaveChanges();
         }
