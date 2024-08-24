@@ -20,5 +20,12 @@ namespace dotNetMVC.Services
         {   //Acessa a fonte de dados da tabela vendedores e converte para uma lista
             return _context.Seller.ToList();
         }
+
+        //Método para inserir o vendedor no banco de dados
+        public void Insert(Seller obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }

@@ -1,0 +1,36 @@
+﻿@model dotNetMVC.Models.Seller;
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Seller</h4>
+<hr />  
+    @*row garante a largura da tela*@
+<div class="row"> @*ocupada 1/3 da tela, bootstrap trabalha em 12 blocos da tela *@
+        <div class="col-md-4">
+            <form asp-action="Create"> @*tag help, define que quando enviar o formulario, chama a ação create, o método POST no controlador*@ 
+                <div class="form-group">
+                    <label asp-for="Name" class="control-label"></label>
+                    <input asp-for="Name" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="BirthDate" class="control-label"></label>
+                    <input asp-for="BirthDate" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label asp-for="BaseSalary" class="control-label"></label>
+                    <input asp-for="BaseSalary" class="form-control" />
+                </div>
+                <div class="form-group"> @*botão de envio do formulario*@
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </form>
+        </div>
+    </div>
