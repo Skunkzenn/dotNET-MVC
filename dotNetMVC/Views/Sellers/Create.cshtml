@@ -1,4 +1,4 @@
-﻿@model dotNetMVC.Models.Seller;
+﻿@model dotNetMVC.Models.ViewModels.SellerFormViewModel;
 
 @{
     ViewData["Title"] = "Create";
@@ -7,30 +7,40 @@
 <h2>@ViewData["Title"]</h2>
 
 <h4>Seller</h4>
-<hr />  
-    @*row garante a largura da tela*@
-<div class="row"> @*ocupada 1/3 da tela, bootstrap trabalha em 12 blocos da tela *@
-        <div class="col-md-4">
-            <form asp-action="Create"> @*tag help, define que quando enviar o formulario, chama a ação create, o método POST no controlador*@ 
-                <div class="form-group">
-                    <label asp-for="Name" class="control-label"></label>
-                    <input asp-for="Name" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="Email" class="control-label"></label>
-                    <input asp-for="Email" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="BirthDate" class="control-label"></label>
-                    <input asp-for="BirthDate" class="form-control" />
-                </div>
-                <div class="form-group">
-                    <label asp-for="BaseSalary" class="control-label"></label>
-                    <input asp-for="BaseSalary" class="form-control" />
-                </div>
-                <div class="form-group"> @*botão de envio do formulario*@
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </form>
-        </div>
+<hr />
+@*row garante a largura da tela*@
+<div class="row">
+    @*ocupada 1/3 da tela, bootstrap trabalha em 12 blocos da tela *@
+    <div class="col-md-4">
+        <form asp-action="Create">
+            @*tag help, define que quando enviar o formulario, chama a ação create, o método POST no controlador*@
+            <div class="form-group">
+                <label asp-for="Seller.Name" class="control-label"></label>
+                <input asp-for="Seller.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.Email" class="control-label"></label>
+                <input asp-for="Seller.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.BirthDate" class="control-label"></label>
+                <input asp-for="Seller.BirthDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.BaseSalary" class="control-label"></label>
+                <input asp-for="Seller.BaseSalary" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Seller.DepartmentId" class="control-label"></label> 
+                <select asp-for="Seller.DepartmentId" 
+                        asp-items="@(new SelectList(Model.Departments,"Id", "Name"))" 
+                        class="form-control"> @* Constrói os itens da caixa de seleção, com base na seleção que passarmos *@
+                </select>
+            </div>
+            <div class="form-group">
+                @*botão de envio do formulario*@
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </form>
     </div>
+</div>
