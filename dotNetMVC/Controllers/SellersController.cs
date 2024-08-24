@@ -46,5 +46,32 @@ namespace dotNetMVC.Controllers
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
+
+        //valor opcional no int de entrada
+        public IActionResult Delete(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            var obj = _sellerService.FindById(id.Value);
+            
+            if (obj == null)
+            {
+                return NotFound();
+            } 
+            return View(obj);
+        }
+
+        //Recebe o objeto vendedor para ser criado o método POST
+        [HttpPost]
+        [ValidateAntiForgeryToken] //Previne que a aplicação sofra ataques CSRF, quando alguem aproveita a nossa sessão de autenticação para enviar dados maliciosos
+        public IActionResult Delete(int id)
+        {
+            _sellerService.Remove(id);
+            return RedirectToAction(nameof(Index));
+        }
+
     }
 }
