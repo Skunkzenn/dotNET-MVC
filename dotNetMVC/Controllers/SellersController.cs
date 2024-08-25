@@ -44,6 +44,12 @@ namespace dotNetMVC.Controllers
         [ValidateAntiForgeryToken] //Previne que a aplicação sofra ataques CSRF, quando alguem aproveita a nossa sessão de autenticação para enviar dados maliciosos
         public IActionResult Create(Seller seller)
         {
+            if (!ModelState.IsValid) // Validação para não ser preenchido o formulário em branco e ser aceite no banco de dados, pois quando o javascript esta desabilitado no browser, poderia-se sofrer este erro.
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments }
+                return View(viewModel); // No caso, repasa-se a view do objeto para que seja completado.
+            }
             _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
         }
@@ -117,6 +123,12 @@ namespace dotNetMVC.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Seller seller)
         {
+            if (!ModelState.IsValid) // Validação para não ser preenchido o formulário em branco e ser aceite no banco de dados
+            {
+                var departments = _departmentService.FindAll();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments}
+                return View(viewModel); // No caso, repasa-se a view do objeto para que seja completado.
+            }
             if (id != seller.Id) // o Id não pode ser diferente, do Id do url da requisição
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });

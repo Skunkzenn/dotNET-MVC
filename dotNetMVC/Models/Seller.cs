@@ -8,19 +8,27 @@ namespace dotNetMVC.Models
     public class Seller
     {
         public int Id { get; set; }
-        public string Name { get; set; }
+                                // nome do atributo!!!    
+        [Required(ErrorMessage = "{0} required")] // Define que o atributo é obrigatório   //{0} pega automaticamente o nome do atributo
+        [StringLength(60, MinimumLength = 3, ErrorMessage = "{0} size should be between {2} and {1}.")] //Tamanho maximo e min de caracteres
+        public string Name { get; set; }                                                //2º parâmetro inserido e segundo parâmetro inserido na definição de StringLength
 
+        [Required(ErrorMessage = "{0} required")]
         [DataType(DataType.EmailAddress)]
+        [EmailAddress(ErrorMessage = "Enter a valid email")]
         public string Email { get; set; }
 
         //Altera nome do objeto visualmente no display(front-end)
         [Display(Name = "Birth Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [Required(ErrorMessage = "{0} required")]
         public DateTime BirthDate { get; set; }
 
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
+        [Required(ErrorMessage = "{0} required")]
+        [Range(100.0, 50000.0, ErrorMessage = "{0} must be from {1} to {2}")]
         public double BaseSalary { get; set; }
         public Department Department { get; set; } //Associação ao departamento
 
