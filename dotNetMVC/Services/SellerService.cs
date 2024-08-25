@@ -42,9 +42,15 @@ namespace dotNetMVC.Services
 
         public async Task RemoveAsync(int id)
         {
+            try { 
             var obj = await _context.Seller.FindAsync(id);
             _context.Seller.Remove(obj);
             await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e) //Tratamento da execessão de deleção de um vendedor com registros de vendas
+            {
+                throw new IntegrityException("Can't delete seller because he/she has sales");
+            }
         }
 
         //Atualizar o obj do tipo seller
