@@ -2,6 +2,8 @@
 using dotNetMVC.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace dotNetMVC.Services
 {
@@ -15,9 +17,11 @@ namespace dotNetMVC.Services
             _context = context;
         }
 
-        public List<Department> FindAll()
+        //Uso de chamada assíncrona
+        //Define-se o async em todas as funções que fazem comunicação com a base de dados
+        public async Task<List<Department>> FindAllAsync()
         {   //Acessa a fonte de dados da tabela vendedores e converte para uma lista
-            return _context.Department.OrderBy(x => x.Name).ToList();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
 
     }

@@ -22,19 +22,19 @@ namespace dotNetMVC.Controllers
             _departmentService = departmentService;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
             //implementar a chamada do sellerservice findall
-            var list = _sellerService.FindAll();
+            var list = await _sellerService.FindAllAsync();
             return View(list);
         }
 
         //Ação para criação de novo cadastro de vendedor
         //Método que abre a página para cadastrar um vendedor
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
             //passa o objeto carregado com os departamentos para a viewModel 
-            var departments = _departmentService.FindAll();
+            var departments = await _departmentService.FindAllAsync();
             var viewModel = new SellerFormViewModel { Departments = departments };
             return View(viewModel);
         }
@@ -42,27 +42,27 @@ namespace dotNetMVC.Controllers
         //Recebe o objeto vendedor para ser criado o método POST
         [HttpPost]
         [ValidateAntiForgeryToken] //Previne que a aplicação sofra ataques CSRF, quando alguem aproveita a nossa sessão de autenticação para enviar dados maliciosos
-        public IActionResult Create(Seller seller)
+        public async Task<IActionResult> Create(Seller seller)
         {
             if (!ModelState.IsValid) // Validação para não ser preenchido o formulário em branco e ser aceite no banco de dados, pois quando o javascript esta desabilitado no browser, poderia-se sofrer este erro.
             {
-                var departments = _departmentService.FindAll();
-                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments }
+                var departments = await _departmentService.FindAllAsync();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
                 return View(viewModel); // No caso, repasa-se a view do objeto para que seja completado.
             }
-            _sellerService.Insert(seller);
+            await _sellerService.InsertAsync(seller);
             return RedirectToAction(nameof(Index));
         }
 
         //valor opcional no int de entrada
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             
-            var obj = _sellerService.FindById(id.Value);
+            var obj = await _sellerService.FindByIdAsync(id.Value);
             
             if (obj == null)
             {
@@ -74,20 +74,20 @@ namespace dotNetMVC.Controllers
         //Recebe o objeto vendedor para ser criado o método POST
         [HttpPost]
         [ValidateAntiForgeryToken] //Previne que a aplicação sofra ataques CSRF, quando alguem aproveita a nossa sessão de autenticação para enviar dados maliciosos
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _sellerService.Remove(id);
+            await _sellerService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" }); ;
             }
 
-            var obj = _sellerService.FindById(id.Value);
+            var obj = await _sellerService.FindByIdAsync(id.Value);
 
             if (obj == null)
             {
@@ -96,14 +96,14 @@ namespace dotNetMVC.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id)
+        public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
             {
                 RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var obj = _sellerService.FindById(id.Value);
+            var obj = await _sellerService.FindByIdAsync(id.Value);
 
             if (obj == null)
             {
@@ -111,7 +111,7 @@ namespace dotNetMVC.Controllers
             }
 
             //Abrir tela de edição, mas para abrir a tela, é preciso povoar a caixa de seleção
-            List<Department> departments = _departmentService.FindAll();
+            List<Department> departments = await _departmentService.FindAllAsync();
             //define a classe seller com o objeto que buscamos na base de dados
             //como estamos fazendo uma edição, vamos preencher já com os dados do objeto existente.
             //Logo também devemos passar o Departments que está na nossa ViewModel
@@ -121,12 +121,12 @@ namespace dotNetMVC.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Seller seller)
+        public async Task<IActionResult> Edit(int id, Seller seller)
         {
             if (!ModelState.IsValid) // Validação para não ser preenchido o formulário em branco e ser aceite no banco de dados
             {
-                var departments = _departmentService.FindAll();
-                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments}
+                var departments = await _departmentService.FindAllAsync();
+                var viewModel = new SellerFormViewModel { Seller = seller, Departments = departments };
                 return View(viewModel); // No caso, repasa-se a view do objeto para que seja completado.
             }
             if (id != seller.Id) // o Id não pode ser diferente, do Id do url da requisição
@@ -135,7 +135,7 @@ namespace dotNetMVC.Controllers
             }
             try //Chamada update pode lançar exceções, por isso devemos tratar
             {
-                _sellerService.Update(seller); //Atualiza o vendedor
+                await _sellerService.UpdateAsync(seller); //Atualiza o vendedor
                 return RedirectToAction(nameof(Index)); //redireciona para a pagina inicial do crud que é o index
             }//Como estamos a tratar as possiveis excessões, as excessões carregam uma mensagem, logo passamos ela como parâmetro de entrada
             catch (NotFoundException e)
