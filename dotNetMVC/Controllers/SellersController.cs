@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -53,14 +53,14 @@ namespace dotNetMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
             
             var obj = _sellerService.FindById(id.Value);
             
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             } 
             return View(obj);
         }
@@ -78,14 +78,14 @@ namespace dotNetMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not provided" }); ;
             }
 
             var obj = _sellerService.FindById(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
             return View(obj);
         }
@@ -94,14 +94,14 @@ namespace dotNetMVC.Controllers
         {
             if (id == null)
             {
-                return NotFound();
+                RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
             var obj = _sellerService.FindById(id.Value);
 
             if (obj == null)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
             //Abrir tela de edição, mas para abrir a tela, é preciso povoar a caixa de seleção
@@ -119,22 +119,39 @@ namespace dotNetMVC.Controllers
         {
             if (id != seller.Id) // o Id não pode ser diferente, do Id do url da requisição
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
             }
             try //Chamada update pode lançar exceções, por isso devemos tratar
             {
                 _sellerService.Update(seller); //Atualiza o vendedor
                 return RedirectToAction(nameof(Index)); //redireciona para a pagina inicial do crud que é o index
-            }
-            catch (NotFoundException)
+            }//Como estamos a tratar as possiveis excessões, as excessões carregam uma mensagem, logo passamos ela como parâmetro de entrada
+            catch (NotFoundException e)
             {
-                return NotFound();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
-            catch (DbConcurrencyException)
+            catch (DbConcurrencyException e)
             {
-                return BadRequest();
+                return RedirectToAction(nameof(Error), new { message = e.Message });
             }
+
+            /*
+             Ou podemos apagar as duas exceções e deixar apenas o super tipo delas
+             catch (ApplicationException e)
+            {
+                return RedirectToAction(nameof(Error), new { message = e.Message });
+            }             
+            */
         }
 
+        public IActionResult Error(string message)
+        {
+            var viewModel = new ErrorViewModel
+            {
+                Message = message,
+                RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier //Massete do framework para pegar o ID interno da requisição 
+            };
+            return View(viewModel);
+        }
     }
 }
