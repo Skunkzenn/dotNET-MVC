@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using dotNetMVC.Data;
 using dotNetMVC.Models;
 using Microsoft.EntityFrameworkCore;
+using dotNetMVC.Services.Exceptions;
 
 namespace dotNetMVC.Services
 {
@@ -41,6 +42,30 @@ namespace dotNetMVC.Services
             var obj = _context.Seller.Find(id);
             _context.Seller.Remove(obj);
             _context.SaveChanges();
+        }
+
+        //Atualizar o obj do tipo seller
+        public void Update(Seller obj)
+        {
+            //Teste de verificação no banco de dados para confirmar se existe o vendedor para ser atualizado
+            if(!_context.Seller.Any(x => x.Id == obj.Id))
+            {
+                throw new DllNotFoundException("Id not found");
+            }
+            //Quando chamamos a operação de atualizar no banco de dados
+            //o banco de dados pode retornar uma excessão de conflitos de concorrência
+            //Logo, devemos tratar isso, utilizando a Exception que criamos para capturar o erro
+            
+            try {
+                _context.Update(obj);
+                _context.SaveChanges();
+            }
+            catch(DbUpdateConcurrencyException e) //Estamos interceptando uma excessão do nivel de acesso a dados
+            {   //E relançando a excessão, só que em nível de serviço, sendo muito importante para segregar as camadas
+                //E assim o controlador(sellerscontroller) vai ter que lidar somente com excessões da camada de serviço,
+                //respeitando a arquitetura que foi proposta a se fazer
+                throw new DbConcurrencyException(e.Message);
+            }
         }
     }
 }

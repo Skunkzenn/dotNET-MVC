@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using dotNetMVC.Services;
 using dotNetMVC.Models.ViewModels;
 using dotNetMVC.Models;
+using dotNetMVC.Services.Exceptions;
 
 namespace dotNetMVC.Controllers
 {
@@ -87,6 +88,52 @@ namespace dotNetMVC.Controllers
                 return NotFound();
             }
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _sellerService.FindById(id.Value);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+
+            //Abrir tela de edição, mas para abrir a tela, é preciso povoar a caixa de seleção
+            List<Department> departments = _departmentService.FindAll();
+            //define a classe seller com o objeto que buscamos na base de dados
+            //como estamos fazendo uma edição, vamos preencher já com os dados do objeto existente.
+            //Logo também devemos passar o Departments que está na nossa ViewModel
+            SellerFormViewModel viewModel = new SellerFormViewModel { Seller = obj, Departments = departments };
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Seller seller)
+        {
+            if (id != seller.Id) // o Id não pode ser diferente, do Id do url da requisição
+            {
+                return BadRequest();
+            }
+            try //Chamada update pode lançar exceções, por isso devemos tratar
+            {
+                _sellerService.Update(seller); //Atualiza o vendedor
+                return RedirectToAction(nameof(Index)); //redireciona para a pagina inicial do crud que é o index
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
 
     }
