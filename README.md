@@ -26,3 +26,19 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
 1. Clone o repositório:
    ```bash
    git clone https://github.com/Skunkzenn/dotNET_2-1_MVC.git
+
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd your-repo-name
+
+3. Configure o banco de dados MySQL:
+      - Certifique-se de que o servidor MySQL está em execução.
+      - Atualize a string de conexão em appsettings.json
+   ```bash
+  "ConnectionStrings": {
+  "SalesWebMvcContext": "server=localhost;userid=youruser;password=yourpassword;database=saleswebmvcappdb"
+}
+
+
+
+      - 
