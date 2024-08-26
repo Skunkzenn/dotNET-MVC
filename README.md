@@ -39,6 +39,39 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
      "SalesWebMvcContext": "server=localhost;userid=youruser;password=yourpassword;database=saleswebmvcappdb"
    }
 
+4. Aplique as migrações e inicialize o banco de dados:
+   ```bash
+   dotnet ef database update
+
+5. Execute a aplicação:
+   ```bash
+   dotnet run
+
+## Estrutura do Projeto
+
+- Controllers: Lidam com requisições, recuperam dados dos modelos e retornam respostas adequadas.
+- Models: Representam as entidades de domínio e incluem lógica de negócios.
+- Views: Definem os componentes da interface do usuário e são renderizados como HTML.
+
+## Funcionalidades Principais
+Gestão de Departamentos: 
+Criar, ler, atualizar e excluir departamentos.
+Validação de dados e tratamento de erros.
+
+Gestão de Vendedores:
+Gerenciar vendedores com associação a departamentos.
+Implementação de funcionalidades de pesquisa e consultas avançadas.
+
+Registros de Vendas:
+Funcionalidade de pesquisa simples e agrupada de vendas.
+Operações assíncronas para melhor desempenho.
+
+## Personalização
+
+- **Temas**:
+  - Altere facilmente o visual trocando o tema Bootstrap em `_Layout.cshtml`.
+
+- **Localização**:
+  - A aplicação suporta diferentes locais, com formatação de números e datas personalizáveis em `Startup.cs`.
 
 
-      - 
