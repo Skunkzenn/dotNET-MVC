@@ -21,7 +21,7 @@ namespace dotNetMVC.Data
         //Responsável por popular a base de dados
         public void Seed()
         {   //testa se existe algum registo na tabela department
-            if(_context.Department.Any() || _context.Seller.Any() || _context.SalesRecord.Any())
+            if (_context.Department.Any() || _context.Seller.Any() || _context.SalesRecord.Any())
             {
                 return; //DB JÁ POSSUÍ DADOS
             }
