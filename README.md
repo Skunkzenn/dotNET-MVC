@@ -25,4 +25,4 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
 
 1. Clone o repositório:
    ```bash
-   git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/Skunkzenn/dotNET_2-1_MVC.git](https://github.com/Skunkzenn/dotNET_2-1_MVC.git)
+   git clone https://github.com/Skunkzenn/dotNET_2-1_MVC.git
