@@ -35,9 +35,9 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
       - Certifique-se de que o servidor MySQL está em execução.
       - Atualize a string de conexão em appsettings.json
    ```bash
-  "ConnectionStrings": {
-  "SalesWebMvcContext": "server=localhost;userid=youruser;password=yourpassword;database=saleswebmvcappdb"
-}
+     "ConnectionStrings": {
+     "SalesWebMvcContext": "server=localhost;userid=youruser;password=yourpassword;database=saleswebmvcappdb"
+   }
 
 
 
