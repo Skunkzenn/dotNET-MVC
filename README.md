@@ -74,4 +74,11 @@ Registros de Vendas:
 - **Localização**:
   - A aplicação suporta diferentes locais, com formatação de números e datas personalizáveis em `Startup.cs`.
 
+## Licença
+Este projeto está licenciado sob a licença MIT. Veja o arquivo LICENSE para mais detalhes.
 
+Este README foi criado para ajudar na compreensão e execução do projeto desenvolvido no curso de C# da Udemy. Se você tiver alguma dúvida ou sugestão, sinta-se à vontade para abrir uma issue ou entrar em contato.
+
+**Autor:** Victor Destefani  
+**Curso:** Desenvolvimento em C# - Udemy  
+**Instrutor:** Nélio Alves
