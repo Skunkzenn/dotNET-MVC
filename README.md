@@ -55,16 +55,16 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
 
 ## Funcionalidades Principais
 Gestão de Departamentos: 
-Criar, ler, atualizar e excluir departamentos.
-Validação de dados e tratamento de erros.
+- Criar, ler, atualizar e excluir departamentos.
+- Validação de dados e tratamento de erros.
 
 Gestão de Vendedores:
-Gerenciar vendedores com associação a departamentos.
-Implementação de funcionalidades de pesquisa e consultas avançadas.
+- Gerenciar vendedores com associação a departamentos.
+- Implementação de funcionalidades de pesquisa e consultas avançadas.
 
 Registros de Vendas:
-Funcionalidade de pesquisa simples e agrupada de vendas.
-Operações assíncronas para melhor desempenho.
+- Funcionalidade de pesquisa simples e agrupada de vendas.
+- Operações assíncronas para melhor desempenho.
 
 ## Personalização
 
