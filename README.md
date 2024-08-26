@@ -18,7 +18,7 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
 ### Pré-requisitos
 
 - **.NET Core SDK 2.1** [.NET Core SDK 2.1 - Download](https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/sdk-2.1.818-windows-x64-installer)
-- **MySQL Server 8.0.12** ou superior
+- **MySQL Server 8.0.12** ou superior [MySQL - All Versions Old](https://downloads.mysql.com/archives/installer/)
 - **Visual Studio 2017 ** ou **Visual Studio 2019 **
 
 ### Instalação
