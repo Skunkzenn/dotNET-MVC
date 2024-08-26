@@ -1,7 +1,5 @@
 # ASP.NET Core MVC Project with Entity Framework and MySQL
 
-![Logo](https://ardalis.com/static/2bcf8d1ec45106e529bb3a6176467a31/c5cb2/aspnetcore-logo.png)
-
 ## Overview
 
 Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2.0.1** e **MySQL 8.0.12**. Utiliza o **Entity Framework Core** para gestão de banco de dados, com o **Pomelo.EntityFrameworkCore.MySql** para comunicação com o banco de dados MySQL. A aplicação está estruturada segundo o padrão de design Model-View-Controller (MVC), garantindo uma clara separação de responsabilidades e facilidade de manutenção.
@@ -19,12 +17,12 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
 
 ### Pré-requisitos
 
-- **.NET Core SDK 2.0.1** ou superior
+- **.NET Core SDK 2.0.1**
 - **MySQL Server 8.0.12** ou superior
-- **Visual Studio 2017** ou superior com a carga de trabalho de desenvolvimento web e ASP.NET
+- **Visual Studio 2017 ** ou **Visual Studio 2019 **
 
 ### Instalação
 
 1. Clone o repositório:
    ```bash
-   git clone https://github.com/yourusername/your-repo-name.git
+   git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/Skunkzenn/dotNET_2-1_MVC.git](https://github.com/Skunkzenn/dotNET_2-1_MVC.git)
