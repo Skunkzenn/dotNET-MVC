@@ -1,6 +1,6 @@
 # ASP.NET Core MVC Project with Entity Framework and MySQL
 
-![Logo](https://yourimagelink.com/logo.png](https://ardalis.com/static/2bcf8d1ec45106e529bb3a6176467a31/c5cb2/aspnetcore-logo.png)
+![Logo](https://ardalis.com/static/2bcf8d1ec45106e529bb3a6176467a31/c5cb2/aspnetcore-logo.png)
 
 ## Overview
 
