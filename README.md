@@ -36,7 +36,7 @@ Este projeto é uma **Aplicação Web** desenvolvida usando **ASP.NET Core MVC 2
       - Atualize a string de conexão em appsettings.json
    ```bash
      "ConnectionStrings": {
-     "SalesWebMvcContext": "server=localhost;userid=youruser;password=yourpassword;database=saleswebmvcappdb"
+     "SalesWebMvcContext": "server=localhost;userid=youruser;password=yourpassword;database=nameudatabase"
    }
 
 4. Aplique as migrações e inicialize o banco de dados:
